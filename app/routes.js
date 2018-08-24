@@ -21,6 +21,13 @@ routes.post('/signin', controllers.authController.signin);
 routes.use(authMiddleware);
 
 /**
+ * Users
+ */
+routes.put('/users', controllers.userController.update);
+routes.get('/users/me', controllers.userController.information);
+routes.get('/users/feed', controllers.userController.feed);
+
+/**
  * Posts
  */
 // routes.post('/posts', controllers.postController.create);

@@ -14,7 +14,7 @@ module.exports = {
       return res.json({
         user,
         postCount,
-        friendsCount: user.followers.length,
+        friendsCount: user.friends.length,
       });
     } catch (err) {
       return next(err);
@@ -24,11 +24,12 @@ module.exports = {
   async feed(req, res, next) {
     try {
       const user = await User.findById(req.userId);
-      const { following } = user;
+      const { friends } = user;
 
+      // all posts from current user or friends of the current user
       const posts = await Post
         .find({
-          user: { $in: [user.id, ...following] },
+          user: { $in: [user.id, ...friends] },
         }).limit(50)
         .sort('-createdAt'); // sort like SQL DESC
       return res.json(posts);
