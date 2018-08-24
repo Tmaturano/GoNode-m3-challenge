@@ -31,6 +31,12 @@ routes.get('/users/feed', controllers.userController.feed);
  * Posts
  */
 routes.post('/posts', controllers.postController.create);
-// routes.delete('/posts/:id', controllers.postController.destroy);
+routes.delete('/posts/:id', controllers.postController.destroy);
+
+/**
+ * Friends
+ */
+routes.post('/friends/:id', controllers.friendController.create);
+routes.delete('/friends/:id', controllers.friendController.remove);
 
 module.exports = routes;
