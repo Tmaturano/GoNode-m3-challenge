@@ -39,4 +39,9 @@ routes.delete('/posts/:id', controllers.postController.destroy);
 routes.post('/friends/:id', controllers.friendController.create);
 routes.delete('/friends/:id', controllers.friendController.remove);
 
+/**
+ * Likes
+ */
+routes.post('/like/:id', controllers.likeController.toggle);
+
 module.exports = routes;
