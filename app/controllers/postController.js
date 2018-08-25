@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Post = mongoose.model('Post');
 const Comment = mongoose.model('Comment');
+const User = mongoose.model('User');
 
 module.exports = {
   async create(req, res, next) {
@@ -30,6 +31,11 @@ module.exports = {
       const post = await Post.findById(postId);
       if (!post) {
         return res.status(400).json({ error: 'Post not found' });
+      }
+
+      const postOwner = await User.findById(post.user);
+      if (postOwner.friends.indexOf(req.userId) === -1) {
+        return res.status(400).json({ error: 'You can\'t add a comment in this post because you aren\'t friend of the Post\'s owner' });
       }
 
       const comment = await Comment.create({ ...req.body, owner: req.userId, post: postId });
