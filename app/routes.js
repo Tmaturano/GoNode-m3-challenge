@@ -34,6 +34,11 @@ routes.post('/posts', controllers.postController.create);
 routes.delete('/posts/:id', controllers.postController.destroy);
 
 /**
+ * Comments
+ */
+routes.post('/posts/:id/comments', controllers.postController.comment);
+
+/**
  * Friends
  */
 routes.post('/friends/:id', controllers.friendController.create);
